@@ -10,35 +10,23 @@ export const initializeAnecdotes = () => {
   }
 }
 
-const clearNotifications = () => {
-    return {
-      type: 'CLEAR_NOTIFICATION'
-    }
-}
-
-export const voteFor = (anecdote, timeout) => {
+export const voteFor = (anecdote) => {
   return async dispatch => {
     const updatedAnecdote = await anecdoteService.updateOne({ ...anecdote, votes: anecdote.votes + 1 })
     dispatch({
       type: 'VOTE',
       data: updatedAnecdote
     })
-    setTimeout(() => {
-      dispatch(clearNotifications())
-    }, timeout * 1000)
   }
 }
 
-export const createAnecdote = (content, timeout) => {
+export const createAnecdote = (content) => {
   return async dispatch => {
     const newAnecdote = await anecdoteService.createOne(content)
     dispatch({
       type: 'CREATE_NEW_ANECDOTE',
       data: newAnecdote
     })
-    setTimeout(() => {
-      dispatch(clearNotifications())
-    }, timeout * 1000)
   }
 }
 

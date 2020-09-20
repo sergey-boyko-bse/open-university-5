@@ -3,7 +3,7 @@ const initialState = ''
 export const filter = (keyword) => {
     return {
       type: 'FILTER',
-      data: keyword
+      data: keyword.toLowerCase()
     }
   }
 
