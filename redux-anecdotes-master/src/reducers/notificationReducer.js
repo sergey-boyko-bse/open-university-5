@@ -1,6 +1,6 @@
 const initialState = {
   message: null,
-  count: 0
+  prevTimeoutId: null
 }
 
 const clearNotifications = () => {
@@ -9,11 +9,19 @@ const clearNotifications = () => {
     }
 }
 
+const setPrevClearNotifications = (prevTimeoutId) => {
+    return {
+      type: 'SET_PREV_CLEAR_NOTIFICATION',
+      data: prevTimeoutId
+    }
+}
+
 export const clearNotification = (timeout) => {
   return async dispatch => {
-    setTimeout(() => {
+    const prevTimeoutId = setTimeout(() => {
       dispatch(clearNotifications())
     }, timeout * 1000)
+    dispatch(setPrevClearNotifications(prevTimeoutId))
   }
 }
 
@@ -21,21 +29,24 @@ const reducer = (state = initialState, action) => {
     switch(action.type) {
         case 'VOTE':
             return {
-              message: `you voted '${action.data.content}'`,
-              count: state.count + 1
+              ...state,
+              message: `you voted '${action.data.content}'`
             }
         case 'CREATE_NEW_ANECDOTE':
             return {
-              message: `you created '${action.data.content}'`,
-              count: state.count + 1
+              ...state,
+              message: `you created '${action.data.content}'`
             }
         case 'CLEAR_NOTIFICATION':
-            return state.count > 1
-            ? {
-                ...state,
-                count: state.count - 1
-            } 
-            : initialState
+            return initialState        
+        case 'SET_PREV_CLEAR_NOTIFICATION':
+            if(state.prevTimeoutId) {
+              window.clearTimeout(state.prevTimeoutId)
+            }            
+            return {
+              ...state,
+              prevTimeoutId: action.data
+            }
         default:
             return state
     }

@@ -41,12 +41,12 @@
     },
     {
       "content": "CCC",
-      "votes": 0,
+      "votes": 8,
       "id": "19n4KC5"
     },
     {
       "content": "DDD",
-      "votes": 3,
+      "votes": 20,
       "id": "Zy7OGbm"
     },
     {
@@ -93,6 +93,11 @@
       "content": "YYY",
       "votes": 2,
       "id": "osQYCri"
+    },
+    {
+      "content": "OOO",
+      "votes": 0,
+      "id": "iO_pymo"
     }
   ]
 }
