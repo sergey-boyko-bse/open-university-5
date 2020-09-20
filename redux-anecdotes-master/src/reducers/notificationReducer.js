@@ -32,8 +32,8 @@ const reducer = (state = initialState, action) => {
         case 'CLEAR_NOTIFICATION':
             return state.count > 1
             ? {
-              ...state,
-              count: state.count - 1
+                ...state,
+                count: state.count - 1
             } 
             : initialState
         default:
